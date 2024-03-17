@@ -18,4 +18,4 @@ RUN pip install pip --upgrade && \
 RUN poetry export -o requirements.txt --without-hashes --dev && \
     pip install -r requirements.txt
 
-RUN make run-server
+ENTRYPOINT ["make", "run-server"]
