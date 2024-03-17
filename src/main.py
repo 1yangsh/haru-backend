@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from config import RESTConfig
-from end_points import api_router
+from end_points import api_router, health_router
 
 app = FastAPI()
 
@@ -23,6 +23,7 @@ def create_app(rest_config: Optional[RESTConfig]) -> FastAPI:
         openapi_url=f"{rest_config.url_prefix}/openapi.json",
     )
     app.include_router(api_router, prefix=rest_config.url_prefix)
+    app.include_router(health_router, prefix=rest_config.url_prefix)
     # app.add_exception_handler(Error, handle_error)
     _add_cors(app, rest_config.cors_allowed_origins)
     return app
